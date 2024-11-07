@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  classificacao:
+    build:
+      context: .  # Referencia o diretório atual
+      dockerfile: Dockerfile
+    env_file:
+      - ./.env
+    ports:
+      - "4000:4000"  # Exemplo de porta, altere conforme necessário
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  barramento:
+    build:
+      context: . 
+      dockerfile: Dockerfile
+    env_file:
+      - ./.env
+    ports:
+      - "10000:10000"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

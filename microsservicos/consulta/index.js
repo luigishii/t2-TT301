@@ -46,7 +46,7 @@ app.post('/eventos', (req, res) => {
 
 app.listen(PORT, async () => {
   console.log(`Consulta. ${PORT}`)
-  const resp = await axios.get('http://192.168.79.167:10000/eventos')
+  const resp = await axios.get('http://localhost:5000/eventos')
   resp.data.forEach((valor, indice, colecao) => {
     try{
       funcoes[valor.type](valor.payload)
