@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logs-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: logs
+  template:
+    metadata:
+      labels:
+        app: logs
+    spec:
+      containers:
+      - name: logs
+        image: logs:latest  # Nome da imagem do microsserviço `logs`
+        ports:
+        - containerPort: 2000  # Porta que o contêiner usa
+        envFrom:
+        - configMapRef:
+            name: logs-config

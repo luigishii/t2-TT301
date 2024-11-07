@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lembretes-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lembretes
+  template:
+    metadata:
+      labels:
+        app: lembretes
+    spec:
+      containers:
+      - name: lembretes
+        image: lembretes:latest  # Nome da imagem do microsserviço `lembretes`
+        ports:
+        - containerPort: 9000   # Porta que o contêiner usa
+        envFrom:
+        - configMapRef:
+            name: lembretes-config

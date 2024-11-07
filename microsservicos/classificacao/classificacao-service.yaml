@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: classificacao-service
+spec:
+  selector:
+    app: classificacao
+  ports:
+    - protocol: TCP
+      port: 4000             # Porta pela qual o serviço será acessado dentro do cluster
+      targetPort: 4000        # Porta exposta pelo contêiner no deployment
+  type: ClusterIP

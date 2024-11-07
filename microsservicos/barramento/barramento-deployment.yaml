@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: barramento-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: barramento
+  template:
+    metadata:
+      labels:
+        app: barramento
+    spec:
+      containers:
+      - name: barramento
+        image: barramento:latest
+        ports:
+        - containerPort: 10000
+        envFrom:
+        - configMapRef:
+            name: barramento-config

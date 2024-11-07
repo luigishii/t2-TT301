@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: classificacao-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: classificacao
+  template:
+    metadata:
+      labels:
+        app: classificacao
+    spec:
+      containers:
+      - name: classificacao
+        image: classificacao:latest  
+        ports:
+        - containerPort: 4000       
+        envFrom:
+        - configMapRef:
+            name: classificacao-config

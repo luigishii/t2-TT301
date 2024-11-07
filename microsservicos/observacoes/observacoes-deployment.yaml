@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: observacoes-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: observacoes
+  template:
+    metadata:
+      labels:
+        app: observacoes
+    spec:
+      containers:
+      - name: observacoes
+        image: observacoes:latest  # Nome da imagem do microsserviço `observacoes`
+        ports:
+        - containerPort: 7000  # Porta que o contêiner usa
+        envFrom:
+        - configMapRef:
+            name: observacoes-config

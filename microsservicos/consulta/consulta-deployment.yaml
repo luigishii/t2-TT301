@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consulta-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: consulta
+  template:
+    metadata:
+      labels:
+        app: consulta
+    spec:
+      containers:
+      - name: consulta
+        image: consulta:latest   # Nome da imagem do microsserviço `consulta`
+        ports:
+        - containerPort: 5000   # Porta que o contêiner usa
+        envFrom:
+        - configMapRef:
+            name: consulta-config
