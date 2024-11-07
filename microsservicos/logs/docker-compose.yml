@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  app:
+    image: logs-app
+    depends_on:
+      - db
+    ports:
+      - "2000:2000"
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=logs
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+    networks:
+      - app-network
+
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: logs
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
